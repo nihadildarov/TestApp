@@ -30,14 +30,6 @@ class RecyclersFragment : Fragment() {
 
     private fun createRecyclers() {
         val txtList = listOf(
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
             "Messi",
             "Ronaldo",
             "Kaka",
@@ -82,6 +74,7 @@ class RecyclersFragment : Fragment() {
 
             constraintSet.clone(constraintLayout)
 
+            //TextView constraints
             if (i == 1){
             constraintSet.connect(textHeader.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID , ConstraintSet.TOP)
             } else {
@@ -95,6 +88,7 @@ class RecyclersFragment : Fragment() {
                 textHeader.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END
             )
 
+            //Recycler constraints
             constraintSet.connect(
                 recycler.id,ConstraintSet.TOP,textHeader.id,ConstraintSet.BOTTOM
             )
@@ -105,7 +99,9 @@ class RecyclersFragment : Fragment() {
                 recycler.id,ConstraintSet.END,ConstraintSet.PARENT_ID,ConstraintSet.END
             )
 
+            //Store previous recyclerId
             prevIdRcy = recycler.id
+            //SetRecyclerAdapter
             recycler.adapter = adapterText
 
             constraintSet.applyTo(constraintLayout)
