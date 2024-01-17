@@ -53,7 +53,7 @@ class RecyclersFragment : Fragment() {
             txtList
         )
 
-
+        var prevIdRcy = 1
 
         for (i in 1..30) {
             val constraintLayout = binding.constraintProducts
@@ -63,7 +63,7 @@ class RecyclersFragment : Fragment() {
             val textHeader = TextView(requireContext())
             textHeader.text = "Header + $i"
 
-            textHeader.id = txtList.size - 1
+            textHeader.id = View.generateViewId()
             textHeader.textAlignment = View.TEXT_ALIGNMENT_TEXT_START
             val params = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_CONSTRAINT,ConstraintLayout.LayoutParams.WRAP_CONTENT)
             textHeader.layoutParams = params
@@ -73,7 +73,7 @@ class RecyclersFragment : Fragment() {
             recycler.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
 
 
-            recycler.id = txtList.size + 1
+            recycler.id = View.generateViewId()
             val paramsRcy = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT,ConstraintLayout.LayoutParams.WRAP_CONTENT)
             recycler.layoutParams = paramsRcy
 
@@ -82,10 +82,12 @@ class RecyclersFragment : Fragment() {
 
             constraintSet.clone(constraintLayout)
 
-            constraintSet.connect(
-                textHeader.id, ConstraintSet.TOP,
-                if (i == 1) ConstraintSet.PARENT_ID else recycler.id, ConstraintSet.BOTTOM
-            )
+            if (i == 1){
+            constraintSet.connect(textHeader.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID , ConstraintSet.TOP)
+            } else {
+                constraintSet.connect(textHeader.id, ConstraintSet.TOP,prevIdRcy , ConstraintSet.BOTTOM)
+            }
+
             constraintSet.connect(
                 textHeader.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START
             )
@@ -103,6 +105,7 @@ class RecyclersFragment : Fragment() {
                 recycler.id,ConstraintSet.END,ConstraintSet.PARENT_ID,ConstraintSet.END
             )
 
+            prevIdRcy = recycler.id
             recycler.adapter = adapterText
 
             constraintSet.applyTo(constraintLayout)
