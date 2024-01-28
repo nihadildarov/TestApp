@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -37,10 +39,21 @@ android {
     buildFeatures{
         viewBinding = true
     }
-
 }
 
 dependencies {
+
+    //exoplayer
+    implementation( "com.google.android.exoplayer:exoplayer:2.19.1")
+    implementation ("com.google.android.exoplayer:exoplayer-core:2.19.1")
+    implementation ("com.google.android.exoplayer:exoplayer-dash:2.19.1")
+    implementation ("com.google.android.exoplayer:exoplayer-ui:2.19.1")
+
+
+
+    //daggerhilt
+    implementation("com.google.dagger:hilt-android:2.48")
+    kapt("com.google.dagger:hilt-android-compiler:2.48")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -51,4 +64,7 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+}
+kapt {
+    correctErrorTypes = true
 }

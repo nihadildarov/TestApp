@@ -1,16 +1,13 @@
 package com.example.testapp
 
 import android.os.Bundle
-import android.text.Layout
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.fragment.app.findFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testapp.databinding.FragmentRecyclersBinding
@@ -23,37 +20,45 @@ class RecyclersFragment : Fragment() {
     ): View? {
         binding = FragmentRecyclersBinding.inflate(inflater, container, false)
         createRecyclers()
+
         return binding.root
+
     }
 
 
 
+
+
     private fun createRecyclers() {
-        val txtList = listOf(
+        val itemList = listOf(
             "Messi",
             "Ronaldo",
             "Kaka",
-            "Carlos",
-            "Robben",
-            "Iniesta",
-            "Xavi",
+            "Nihad",
+            "Beckham",
+            "C.Ronaldo",
             "Casillas"
-
         )
 
         val adapterText = Adapter(
-            txtList
+            itemList
+        )
+
+        val txtList = listOf(
+            "Master",
+            "Chief",
+            "Expert"
         )
 
         var prevIdRcy = 1
 
-        for (i in 1..30) {
+        for (i in 1..3) {
             val constraintLayout = binding.constraintProducts
             val constraintSet = ConstraintSet()
 
 
             val textHeader = TextView(requireContext())
-            textHeader.text = "Header + $i"
+            textHeader.text = txtList[i-1]
 
             textHeader.id = View.generateViewId()
             textHeader.textAlignment = View.TEXT_ALIGNMENT_TEXT_START

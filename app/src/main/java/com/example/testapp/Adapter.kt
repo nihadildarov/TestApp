@@ -28,7 +28,7 @@ class Adapter (val txtList:List<String>):RecyclerView.Adapter<Adapter.AdapterVie
     inner class AdapterViewHolder(private val binding:ItemBinding):RecyclerView.ViewHolder(binding.root){
 
         fun bind(txt:String){
-            binding.txtItem.text = txt
+
         }
     }
 }
